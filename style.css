@@ -786,6 +786,10 @@ section {
     font-size: var(--text-xs);
 }
 
+.footer-bottom a {
+    color: var(--off-white);
+}
+
 /* ==========================================
    WHATSAPP FLOATING BUTTON
    ========================================== */
