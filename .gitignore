@@ -1,0 +1,32 @@
+# Logs e dados sensíveis
+logs/
+*.log
+
+# Arquivos de configuração local
+.env
+config.local.php
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Dependências (se usar Composer)
+/vendor/
+composer.lock
+
+# Backups
+*.bak
+*.backup
+*.old
+
+# Arquivos temporários
+*.tmp
+*.temp

@@ -80,43 +80,88 @@ if (formContato) {
     formContato.addEventListener('submit', function(e) {
         e.preventDefault();
 
-        // Coletar dados do formulário
-        const formData = {
-            nome: document.getElementById('nome').value,
-            telefone: document.getElementById('telefone').value,
-            email: document.getElementById('email').value,
-            tipoAtendimento: document.getElementById('tipoAtendimento').value,
-            idadePaciente: document.getElementById('idadePaciente').value,
-            motivoPrincipal: document.getElementById('motivoPrincipal').value,
-            possuiDiagnostico: document.getElementById('possuiDiagnostico').value,
-            melhorHorario: document.getElementById('melhorHorario').value,
-            lgpd: document.getElementById('lgpd').checked
-        };
+        // Prevenir envio múltiplo
+        if (enviandoFormulario) {
+            return;
+        }
 
         // Validar LGPD
-        if (!formData.lgpd) {
+        if (!document.getElementById('lgpd').checked) {
             alert('Por favor, aceite os termos da LGPD para continuar.');
             return;
         }
 
-        // Criar mensagem para WhatsApp
-        const mensagemWhatsApp = criarMensagemWhatsApp(formData);
+        // Iniciar envio
+        enviandoFormulario = true;
+        const btnEnviar = formContato.querySelector('button[type="submit"]');
+        const textoOriginal = btnEnviar.textContent;
+        btnEnviar.textContent = 'Enviando...';
+        btnEnviar.disabled = true;
 
-        // Redirecionar para WhatsApp
-        const numeroWhatsApp = '5511990186911';
-        const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagemWhatsApp)}`;
+        // Coletar dados do formulário
+        const formData = new FormData(formContato);
 
-        // Mostrar mensagem de sucesso
-        mostrarMensagemSucesso();
+        // Enviar via AJAX
+        fetch('enviar-formulario.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.sucesso) {
+                // Mostrar mensagem de sucesso
+                mensagemSucesso.innerHTML = '<p>✓ ' + data.mensagem + '</p>';
+                mensagemSucesso.style.display = 'block';
+                mensagemSucesso.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-        // Aguardar 1 segundo e redirecionar
-        setTimeout(() => {
+                // Limpar formulário
+                formContato.reset();
+
+                // Oferecer opção de WhatsApp
+                if (data.whatsapp) {
+                    setTimeout(() => {
+                        if (confirm('Deseja também enviar uma mensagem via WhatsApp?')) {
+                            window.open(data.whatsapp, '_blank');
+                        }
+                    }, 1500);
+                }
+
+                // Esconder mensagem após 10 segundos
+                setTimeout(() => {
+                    mensagemSucesso.style.display = 'none';
+                }, 10000);
+            } else {
+                // Erro no envio
+                alert('Erro: ' + data.mensagem + '\n\nVamos redirecioná-lo para o WhatsApp.');
+                if (data.whatsapp) {
+                    window.open(data.whatsapp, '_blank');
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao enviar formulário. Redirecionando para WhatsApp...');
+            
+            // Fallback para WhatsApp
+            const nome = document.getElementById('nome').value;
+            const mensagemWhatsApp = criarMensagemWhatsApp({
+                nome: nome,
+                telefone: document.getElementById('telefone').value,
+                email: document.getElementById('email').value,
+                tipoAtendimento: document.getElementById('tipoAtendimento').value,
+                idadePaciente: document.getElementById('idadePaciente').value,
+// Função removida - agora integrada no handler do formulário           });
+            
+            const numeroWhatsApp = '5511990186911';
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagemWhatsApp)}`;
             window.open(urlWhatsApp, '_blank');
-            formContato.reset();
-            setTimeout(() => {
-                mensagemSucesso.style.display = 'none';
-            }, 5000);
-        }, 1000);
+        })
+        .finally(() => {
+            // Restaurar botão
+            enviandoFormulario = false;
+            btnEnviar.textContent = textoOriginal;
+            btnEnviar.disabled = false;
+        });
     });
 }
 
@@ -252,21 +297,7 @@ inputs.forEach(input => {
 let enviandoFormulario = false;
 
 if (formContato) {
-    formContato.addEventListener('submit', function(e) {
-        if (enviandoFormulario) {
-            e.preventDefault();
-            return;
-        }
-        enviandoFormulario = true;
-        
-        setTimeout(() => {
-            enviandoFormulario = false;
-        }, 3000);
-    });
-}
-
-// ==========================================
-// CONTROLE DE IDADE DO PACIENTE
+    formContato.addEventListene/ CONTROLE DE IDADE DO PACIENTE
 // ==========================================
 
 const tipoAtendimentoSelect = document.getElementById('tipoAtendimento');
