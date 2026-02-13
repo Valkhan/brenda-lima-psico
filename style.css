@@ -32,6 +32,7 @@
     --spacing-md: 2rem;
     --spacing-lg: 4rem;
     --spacing-xl: 6rem;
+    --spacing-xxl: 10rem;
     
     /* Tamanhos de fonte */
     --text-xs: 0.875rem;
@@ -250,7 +251,7 @@ ul {
     grid-template-columns: 1.2fr 1fr;
     align-items: center;
     gap: var(--spacing-lg);
-    padding: var(--spacing-xl) var(--spacing-md);
+    padding: var(--spacing-xxl);
     background: linear-gradient(135deg, var(--off-white) 0%, var(--bege-claro) 100%);
     margin-top: 80px;
 }
@@ -306,11 +307,19 @@ ul {
 }
 
 .hero-image-placeholder {
-    width: 100%;
-    height: 500px;
-    background: linear-gradient(135deg, var(--verde-salvia) 0%, var(--terracota) 100%);
+    width: 80%;
+    margin-left: 20%;
+    aspect-ratio: 746 / 800;
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.hero-image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 /* ==========================================
@@ -318,7 +327,7 @@ ul {
    ========================================== */
 
 section {
-    padding: var(--spacing-xl) 0;
+    padding: var(--spacing-xxl) 0;
 }
 
 .section-title {
@@ -529,7 +538,6 @@ section {
 .image-placeholder {
     width: 100%;
     height: 400px;
-    background: linear-gradient(135deg, var(--terracota) 0%, var(--verde-salvia) 100%);
     border-radius: 15px;
 }
 
@@ -572,9 +580,17 @@ section {
 
 .sobre-image .image-placeholder.profile {
     width: 100%;
-    height: 500px;
-    background: linear-gradient(135deg, var(--verde-salvia) 0%, var(--off-white) 100%);
+    aspect-ratio: 898 / 1600;
+    min-height: 500px;
     border-radius: 15px;
+    overflow: hidden;
+}
+
+.sobre-image .image-placeholder.profile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .sobre-text {
@@ -846,11 +862,6 @@ section {
     
     .hero-image {
         display: none;
-    }
-    
-    .content-split {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-md);
     }
     
     .sobre-content {
