@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500;600&family=Satisfy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500;600&family=Satisfy&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
@@ -51,10 +51,10 @@
             </button>
             <ul class="nav-menu">
                 <li><a href="#inicio">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
                 <li><a href="#psicoterapia">Psicoterapia</a></li>
                 <li><a href="#quando-procurar">Quando Procurar</a></li>
                 <li><a href="#avaliacao">Avaliação</a></li>
-                <li><a href="#sobre">Sobre</a></li>
                 <li><a href="#contato" class="btn-nav">Agendar</a></li>
             </ul>
         </nav>
@@ -85,6 +85,58 @@
         </div>
     </section>
 
+    <!-- Sobre Brenda Section -->
+    <section id="sobre" class="sobre">
+        <div class="container">
+            <h2 class="section-title center">Sobre Brenda</h2>
+            <div class="sobre-content">
+                <div class="sobre-image">
+                    <div class="image-placeholder profile">
+                        <img src="img/brenda-lima-retrato.jpg" alt="">
+                    </div>
+                </div>
+                <div class="sobre-text">
+                    <p class="intro-text">
+                        Acredito que cada pessoa carrega uma história única e merece ser compreendida em sua 
+                        totalidade. Meu trabalho é unir o rigor científico à sensibilidade humana.
+                    </p>
+                    
+                    <div class="cards-sobre-grid">
+                        <div class="card-sobre">
+                            <h3>Formação e Experiência</h3>
+                            <ul class="credentials">
+                                <li><strong>Psicóloga</strong> - CRP 06/142078</li>
+                                <li>Graduação em Psicologia pela UNIP (2013-2017)</li>
+                                <li><strong>Especialista em Análise do Comportamento Aplicada (ABA)</strong> do Transtorno do Espectro Autista e Atrasos no Desenvolvimento Infantil - Instituto Par (2018-2020)</li>
+                                <li><strong>Especialista em Neuropsicologia</strong> - Hospital Israelita Albert Einstein (2023)</li>
+                                <li>10 anos de atuação na área</li>
+                                <li>Experiência como Acompanhante Terapêutica desde 2016</li>
+                                <li>Atendimento clínico desde 2017</li>
+                            </ul>
+                        </div>
+                        <div class="card-sobre">
+                            <h3>Abordagem</h3>
+                            <p>
+                                Trabalho com a certeza de que comportamento humano pode ser compreendido e transformado. 
+                                Meu foco é fornecer um espaço seguro onde você possa explorar suas dificuldades, desenvolver 
+                                novos recursos e construir uma vida com mais significado e autonomia.
+                            </p>
+
+                            <p>
+                                Ofereço <strong>acolhimento genuíno, escuta atenta e intervenções baseadas em evidências 
+                                científicas</strong>. Não prometo soluções mágicas, mas um trabalho sério, ético e 
+                                comprometido com sua transformação.
+                            </p>
+                        </div>
+                    </div>
+
+                    <p class="quote">❝Ser psicólogo é estar presente, escutar com empatia e ajudar a construir novos caminhos. É ciência e cuidado humano promovendo transformação e bem-estar.❞
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Quando Procurar Ajuda Section -->
     <section id="quando-procurar" class="quando-procurar">
         <div class="container">
@@ -94,46 +146,34 @@
             </p>
             <div class="cards-grid">
                 <div class="card">
-                    <div class="card-image">
-                        <img src="img/ansiedade-constante.jpg" alt="Ansiedade" loading="lazy">
-                    </div>
+                    <div class="card-icon"><img src="img/ansiedade-constante.png" alt="Ansiedade"></div>
                     <h3>Ansiedade Constante</h3>
-                    <p>Quando a preocupação excessiva interfere no seu dia a dia e bem-estar.</p>
+                    <p>Preocupação excessiva interferindo no dia a dia, relacionamentos e bem-estar geral.</p>
                 </div>
                 <div class="card">
-                    <div class="card-image">
-                        <img src="img/dificuldade-expressao.jpg" alt="Comunicação" loading="lazy">
-                    </div>
+                    <div class="card-icon"><img src="img/dificuldade-expressao.png" alt="Dificuldade de Expressão"></div>
                     <h3>Dificuldade de Expressão</h3>
-                    <p>Sensação de não conseguir colocar em palavras o que sente ou dificuldade em lidar com emoções.</p>
+                    <p>Sensação de não conseguir colocar em palavras o que sente ou lidar com emoções.</p>
                 </div>
                 <div class="card">
-                    <div class="card-image">
-                        <img src="img/sofrimento-emocional.jpg" alt="Acolhimento" loading="lazy">
-                    </div>
+                    <div class="card-icon"><img src="img/sofrimento-emocional.png" alt="Sofrimento Emocional"></div>
                     <h3>Sofrimento Emocional</h3>
-                    <p>Quando a dor emocional persiste e você busca compreender e transformar seus padrões de comportamento.</p>
+                    <p>Quando a dor emocional persiste e você busca compreender seus padrões de comportamento.</p>
                 </div>
                 <div class="card">
-                    <div class="card-image">
-                        <img src="img/dificuldade-relacionamento.jpg" alt="Relacionamentos" loading="lazy">
-                    </div>
-                    <h3>Dificuldades nos Relacionamentos</h3>
-                    <p>Padrões que se repetem e geram sofrimento nas suas relações pessoais e profissionais.</p>
+                    <div class="card-icon"><img src="img/relacionamento.png" alt="Conflitos Relacionais"></div>
+                    <h3>Conflitos Relacionais</h3>
+                    <p>Padrões repetitivos que geram sofrimento nas relações pessoais e profissionais.</p>
                 </div>
                 <div class="card">
-                    <div class="card-image">
-                        <img src="img/desenvolvimento-infantil.jpg" alt="Desenvolvimento Infantil" loading="lazy">
-                    </div>
+                    <div class="card-icon"><img src="img/desenvolvimento-infantil.png" alt="Desenvolvimento Infantil"></div>
                     <h3>Desenvolvimento Infantil</h3>
-                    <p>Dificuldades na fala, interação social ou marcos do desenvolvimento (atendimento presencial).</p>
+                    <p>Dificuldades na fala, interação social ou marcos do desenvolvimento (presencial).</p>
                 </div>
                 <div class="card">
-                    <div class="card-image">
-                        <img src="img/avaliacao-diagnostica.jpg" alt="Avaliação Neuropsicológica" loading="lazy">
-                    </div>
+                    <div class="card-icon"><img src="img/investigacao-diagnostica.png" alt="Investigação Diagnóstica"></div>
                     <h3>Investigação Diagnóstica</h3>
-                    <p>Suspeita de TEA, TDAH ou outras questões que necessitam de avaliação neuropsicológica (presencial).</p>
+                    <p>Suspeita de TEA, TDAH ou questões que necessitam avaliação neuropsicológica (presencial).</p>
                 </div>
             </div>
         </div>
@@ -143,74 +183,52 @@
     <section id="avaliacao" class="avaliacao">
         <div class="container">
             <h2 class="section-title">Avaliação Neuropsicológica</h2>
-            <p class="section-subtitle">Atendimento Presencial | 8 a 10 sessões de 1 hora</p>
+            <p class="section-subtitle">Atendimento Presencial | 8 a 10 sessões</p>
             
             <h3>O que é?</h3>
-            <p>
-                É um processo científico e humano que investiga como o cérebro funciona: memória, atenção, 
-                linguagem, raciocínio, emoções e comportamento. Realiza-se através de entrevistas, 
-                testes padronizados e observação clínica.
-            </p>
+            <p>Avaliação científica que investiga memória, atenção, linguagem, raciocínio e comportamento através de entrevistas, testes padronizados e observação clínica.</p>
             
             <h3>Para quem é?</h3>
             <ul class="styled-list">
-                <li>Crianças com dificuldades de aprendizagem ou desenvolvimento (apenas presencial)</li>
+                <li>Crianças com dificuldades de aprendizagem ou desenvolvimento</li>
                 <li>Suspeita de TEA, TDAH, dislexia ou outros transtornos</li>
-                <li>Adultos com queixas de memória, atenção ou alterações cognitivas</li>
-                <li>Investigação de diagnósticos complexos</li>
+                <li>Adultos com alterações de memória ou atenção</li>
             </ul>
             
             <h3>Como funciona?</h3>
-            <p class="process-intro">O processo completo dura entre 8 e 10 sessões de 1 hora cada:</p>
             <div class="steps">
                 <div class="step">
                     <span class="step-number">1</span>
                     <div class="step-content">
-                        <h4>Entrevista Inicial (Anamnese)</h4>
-                        <p>Compreensão detalhada da sua história, queixas e contexto de vida.</p>
+                        <h4>Anamnese</h4>
+                        <p>Histórico e queixa principal.</p>
                     </div>
                 </div>
                 <div class="step">
                     <span class="step-number">2</span>
                     <div class="step-content">
-                        <h4>Aplicação de Testes</h4>
-                        <p>Instrumentos padronizados e validados cientificamente (podem ser realizadas até 2 sessões no mesmo dia).</p>
+                        <h4>Testes</h4>
+                        <p>Instrumentos padronizados (até 10 sessões).</p>
                     </div>
                 </div>
                 <div class="step">
                     <span class="step-number">3</span>
                     <div class="step-content">
-                        <h4>Correção e Análise</h4>
-                        <p>Interpretação cuidadosa de todos os dados coletados e elaboração do relatório.</p>
+                        <h4>Análise</h4>
+                        <p>Interpretação dos resultados.</p>
                     </div>
                 </div>
                 <div class="step">
                     <span class="step-number">4</span>
                     <div class="step-content">
                         <h4>Devolutiva</h4>
-                        <p>Apresentação dos resultados e relatório técnico com orientações e encaminhamentos.</p>
+                        <p>Relatório com orientações e encaminhamentos.</p>
                     </div>
                 </div>
             </div>
             
             <div class="highlight-box">
-                <h4>Importante sobre o Relatório</h4>
-                <p>
-                    O relatório neuropsicológico indica, com base no DSM-V, CID-10 e resultados dos testes, 
-                    se há indícios que sugerem algum diagnóstico. Porém, <strong>apenas médicos podem fornecer 
-                    laudos com diagnósticos fechados</strong>. Trabalho em conjunto com outros profissionais 
-                    para oferecer um cuidado completo e integrado.
-                </p>
-            </div>
-
-            <div class="highlight-box accent">
-                <p><strong>Atendimento Infantil:</strong> Durante o acompanhamento, são realizadas sessões mensais 
-                de orientação para os pais e, quando necessário, reuniões com a escola e outros profissionais. 
-                Relatórios para escola ou outros terapeutas são fornecidos quando pertinente.</p>
-            </div>
-
-            <div class="highlight-box">
-                <p><strong>Importante:</strong> Não atendo adolescentes. Atendimento infantil disponível apenas presencialmente.</p>
+                <p><strong>Nota:</strong> Relatório indica indícios conforme DSM-V/CID-10. Diagnósticos fechados são responsabilidade médica. <strong>Não atendo adolescentes. Infantil: presencial com orientação aos pais.</strong></p>
             </div>
         </div>
     </section>
@@ -228,79 +246,22 @@
                     </div>
 
                     <h3>Abordagem: Análise do Comportamento</h3>
-                    <p>
-                        A Análise do Comportamento é uma ciência baseada em evidências que estuda como aprendemos 
-                        e como nosso comportamento se relaciona com o ambiente. É focada em resultados reais e 
-                        transformação sustentável.
-                    </p>
+                    <p>Ciência baseada em evidências que estuda como aprendemos e como nosso comportamento se relaciona com o ambiente. Focada em resultados reais e transformação sustentável.</p>
 
-                    <h3>Como funciona na prática?</h3>
+                    <h3>Para quem é?</h3>
                     <ul class="styled-list">
-                        <li><strong>Compreensão:</strong> Entender o que mantém comportamentos que causam sofrimento</li>
-                        <li><strong>Desenvolvimento de habilidades:</strong> Construir novos repertórios comportamentais</li>
-                        <li><strong>Estratégias práticas:</strong> Ferramentas para lidar com desafios do cotidiano</li>
-                        <li><strong>Autonomia:</strong> Fortalecer sua capacidade de fazer escolhas conscientes</li>
+                        <li>Quem busca autoconhecimento e transformação comportamental</li>
+                        <li>Ansiedade, padrões repetitivos ou dificuldades emocionais</li>
+                        <li>Desenvolvimento de habilidades sociais e emocionais</li>
                     </ul>
 
-                    <h3>Para quem é indicado?</h3>
+                    <h3>Na prática:</h3>
                     <ul class="styled-list">
-                        <li>Adultos que buscam autoconhecimento e transformação comportamental</li>
-                        <li>Pessoas com ansiedade, dificuldades emocionais ou padrões repetitivos</li>
-                        <li>Quem deseja desenvolver habilidades sociais e emocionais</li>
+                        <li><strong>Compreensão:</strong> Entender padrões que causam sofrimento</li>
+                        <li><strong>Desenvolvimento:</strong> Construir novos repertórios comportamentais</li>
+                        <li><strong>Ferramentas:</strong> Estratégias práticas para desafios do cotidiano</li>
+                        <li><strong>Autonomia:</strong> Fortalecer escolhas conscientes</li>
                     </ul>
-
-                    <p class="emphasis">
-                        Ciência + cuidado humano. Técnica + acolhimento.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sobre Brenda Section -->
-    <section id="sobre" class="sobre">
-        <div class="container">
-            <h2 class="section-title center">Sobre Brenda</h2>
-            <div class="sobre-content">
-                <div class="sobre-image">
-                    <div class="image-placeholder profile">
-                        <img src="img/brenda-lima-retrato.jpg" alt="">
-                    </div>
-                </div>
-                <div class="sobre-text">
-                    <p class="intro-text">
-                        Acredito que cada pessoa carrega uma história única e merece ser compreendida em sua 
-                        totalidade. Meu trabalho é unir o rigor científico à sensibilidade humana.
-                    </p>
-                    
-                    <h3>Formação e Experiência</h3>
-                    <ul class="credentials">
-                        <li><strong>Psicóloga</strong> - CRP 06/142078</li>
-                        <li>Graduação em Psicologia pela UNIP (2013-2017)</li>
-                        <li><strong>Especialista em Análise do Comportamento Aplicada (ABA)</strong> do Transtorno do Espectro Autista e Atrasos no Desenvolvimento Infantil - Instituto Par (2018-2020)</li>
-                        <li><strong>Especialista em Neuropsicologia</strong> - Hospital Israelita Albert Einstein (2023)</li>
-                        <li>10 anos de atuação na área</li>
-                        <li>Experiência como Acompanhante Terapêutica desde 2016</li>
-                        <li>Atendimento clínico desde 2017</li>
-                    </ul>
-
-                    <h3>Abordagem</h3>
-                    <p>
-                        Trabalho com a certeza de que comportamento humano pode ser compreendido e transformado. 
-                        Meu foco é fornecer um espaço seguro onde você possa explorar suas dificuldades, desenvolver 
-                        novos recursos e construir uma vida com mais significado e autonomia.
-                    </p>
-
-                    <p>
-                        Ofereço <strong>acolhimento genuíno, escuta atenta e intervenções baseadas em evidências 
-                        científicas</strong>. Não prometo soluções mágicas, mas um trabalho sério, ético e 
-                        comprometido com sua transformação.
-                    </p>
-
-                    <p class="quote">
-                        "Ser psicólogo é estar presente, escutar com empatia e ajudar a construir novos caminhos. 
-                        É ciência e cuidado humano promovendo transformação e bem-estar."
-                    </p>
                 </div>
             </div>
         </div>
@@ -389,7 +350,7 @@
                 </div>
 
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Enviar Solicitação</button>
+                    <button type="submit" class="btn btn-primary send-button">Enviar Solicitação</button>
                 </div>
 
                 <div id="mensagemSucesso" class="mensagem-sucesso" style="display: none;">

@@ -11,7 +11,7 @@
 :root {
     /* Cores principais baseadas na identidade visual */
     --vermelho-profundo: #d01c1f;
-    --vermelho-escuro: ##9e1527;
+    --vermelho-escuro: #9e1527;
     --off-white: #FAF7F5;
     --bege-claro: #F5F1ED;
     --verde-salvia: #9BA89B;
@@ -25,6 +25,7 @@
     --font-display: 'Cormorant Garamond', serif;
     --font-cursive: 'Satisfy', cursive;
     --font-body: 'Inter', sans-serif;
+    --font-alt: 'DM Sans', sans-serif;
     
     /* Espaçamentos */
     --spacing-xs: 0.5rem;
@@ -143,7 +144,7 @@ ul {
 }
 
 .logo-name {
-    font-family: var(--font-cursive);
+    font-family: var(--font-alt);
     font-size: var(--text-lg);
     font-weight: 600;
     color: var(--vermelho-profundo);
@@ -253,7 +254,8 @@ ul {
     gap: var(--spacing-lg);
     padding: var(--spacing-xxl);
     background: linear-gradient(135deg, var(--off-white) 0%, var(--bege-claro) 100%);
-    margin-top: 80px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .hero-content {
@@ -266,7 +268,7 @@ ul {
 
 .name-title {
     display: block;
-    font-family: var(--font-cursive);
+    font-family: var(--font-alt);
     font-size: calc(var(--text-3xl) + 0.5rem);
     font-weight: 400;
     color: var(--vermelho-profundo);
@@ -307,10 +309,10 @@ ul {
 }
 
 .hero-image-placeholder {
-    width: 80%;
-    margin-left: 20%;
+    width: 100%;
+    max-width: 400px;
     aspect-ratio: 746 / 800;
-    border-radius: 20px;
+    border-radius: 10px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
@@ -332,7 +334,7 @@ section {
 }
 
 .section-title {
-    font-family: var(--font-cursive);
+    font-family: var(--font-alt);
     font-size: var(--text-2xl);
     font-weight: 400;
     color: var(--vermelho-profundo);
@@ -348,7 +350,6 @@ section {
     font-size: var(--text-md);
     color: var(--cinza-medio);
     margin-bottom: var(--spacing-lg);
-    max-width: 700px;
 }
 
 .section-intro.center {
@@ -383,40 +384,38 @@ section {
     padding: 0;
     border-radius: 15px;
     transition: var(--transition);
-    border: 1px solid var(--bege-claro);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-    border-color: var(--verde-salvia);
+.card-icon {
+    font-size: 3.5rem;
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    display: block;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.card-image {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-}
-
-.card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition);
-}
-
-.card:hover .card-image img {
-    transform: scale(1.05);
+.card-icon img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    filter: invert(27%) sepia(67%) saturate(1241%) hue-rotate(334deg);
 }
 
 .card h3 {
-    font-family: var(--font-cursive);
+    font-family: var(--font-alt);
     font-size: var(--text-lg);
     color: var(--vermelho-profundo);
     margin-bottom: var(--spacing-xs);
     font-weight: 400;
-    padding: var(--spacing-md) var(--spacing-md) 0;
+    padding: 0 var(--spacing-md);
 }
 
 .card p {
@@ -434,8 +433,17 @@ section {
     background-color: var(--off-white);
 }
 
+.avaliacao h3 {
+    font-family: var(--font-alt);
+    font-size: calc(var(--text-lg) + 0.25rem);
+    color: var(--vermelho-profundo);
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 400;
+}
+
 .content-text h3 {
-    font-family: var(--font-cursive);
+    font-family: var(--font-alt);
     font-size: calc(var(--text-lg) + 0.25rem);
     color: var(--vermelho-profundo);
     margin-top: var(--spacing-md);
@@ -464,8 +472,12 @@ section {
     content: "→";
     position: absolute;
     left: 0;
+    top: 0;
     color: var(--vermelho-profundo);
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 .process-intro {
@@ -498,7 +510,7 @@ section {
 }
 
 .step-content h4 {
-    font-family: var(--font-cursive);
+    font-family: var(--font-alt);
     font-size: calc(var(--text-md) + 0.125rem);
     color: var(--vermelho-profundo);
     margin-bottom: 0.25rem;
@@ -530,7 +542,7 @@ section {
 
 .highlight-box h4 {
     color: var(--branco);
-    font-family: var(--font-cursive);
+    font-family: var(--font-alt);
     font-size: calc(var(--text-lg) + 0.25rem);
     margin-bottom: var(--spacing-xs);
     font-weight: 400;
@@ -564,38 +576,173 @@ section {
    ========================================== */
 
 .sobre {
-    background-color: var(--vermelho-profundo);
-    color: var(--branco);
+    background-color: var(--off-white);
+    color: var(--cinza-escuro);
 }
 
 .sobre .section-title {
-    color: var(--branco);
+    color: var(--vermelho-profundo);
 }
 
 .sobre-content {
     display: grid;
-    grid-template-columns: 400px 1fr;
+    grid-template-columns: 1fr;
     gap: var(--spacing-lg);
     align-items: center;
 }
 
 .sobre-image .image-placeholder.profile {
-    width: 100%;
-    aspect-ratio: 898 / 1600;
-    min-height: 500px;
-    border-radius: 15px;
+    width: 325px;
+    height: 325px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
     overflow: hidden;
+    margin: 0 auto;
 }
 
 .sobre-image .image-placeholder.profile img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 30%;
     display: block;
 }
 
 .sobre-text {
-    color: var(--off-white);
+    color: var(--cinza-escuro);
+}
+
+.sobre-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: var(--spacing-lg);
+}
+
+/* ==========================================
+   TABS AVALIAÇÃO
+   ========================================== */
+
+.tabs-avaliation {
+    margin: var(--spacing-lg) 0;
+}
+
+.tabs-nav {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--bege-claro);
+    margin-bottom: var(--spacing-lg);
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: var(--spacing-md) var(--spacing-md);
+    font-family: var(--font-alt);
+    font-size: var(--text-md);
+    color: var(--cinza-medio);
+    cursor: pointer;
+    transition: var(--transition);
+    border-bottom: 3px solid transparent;
+    position: relative;
+    bottom: -2px;
+}
+
+.tab-btn:hover {
+    color: var(--cinza-escuro);
+}
+
+.tab-btn.active {
+    color: var(--vermelho-profundo);
+    border-bottom-color: var(--vermelho-profundo);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-content p {
+    line-height: 1.8;
+    color: var(--cinza-medio);
+    margin-bottom: var(--spacing-md);
+}
+
+.steps.compact {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin: 0;
+}
+
+.steps.compact .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--spacing-sm);
+    margin: 0;
+}
+
+.steps.compact .step-content h4,
+.steps.compact .step-content p {
+    text-align: center;
+}
+
+/* ==========================================
+   THERAPY CARDS - PSICOTERAPIA
+   ========================================== */
+
+.therapy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+}
+
+.therapy-card {
+    background-color: var(--branco);
+    padding: var(--spacing-lg);
+    border-radius: 12px;
+    border-top: 4px solid var(--vermelho-profundo);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    transition: var(--transition);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.therapy-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.therapy-icon {
+    font-size: 3rem;
+}
+
+.therapy-card h3 {
+    font-family: var(--font-alt);
+    font-size: var(--text-lg);
+    color: var(--vermelho-profundo);
+    margin: 0;
+}
+
+.therapy-card p {
+    color: var(--cinza-medio);
+    margin: 0;
+    line-height: 1.7;
+}
+
+.therapy-card .styled-list {
+    padding-left: var(--spacing-md);
+    text-align: left;
 }
 
 .intro-text {
@@ -603,20 +750,21 @@ section {
     font-size: var(--text-lg);
     line-height: 1.6;
     margin-bottom: var(--spacing-md);
-    color: var(--branco);
+    color: var(--cinza-escuro);
+    text-align: center;
 }
 
 .sobre-text h3 {
-    font-family: var(--font-cursive);
+    font-family: var(--font-alt);
     font-size: calc(var(--text-lg) + 0.25rem);
-    color: var(--branco);
+    color: var(--vermelho-profundo);
     margin-top: var(--spacing-md);
     margin-bottom: var(--spacing-sm);
     font-weight: 400;
 }
 
 .sobre-text p {
-    color: var(--off-white);
+    color: var(--cinza-escuro);
     margin-bottom: var(--spacing-md);
 }
 
@@ -629,26 +777,29 @@ section {
     position: relative;
     padding-left: var(--spacing-sm);
     margin-bottom: var(--spacing-xs);
-    color: var(--off-white);
+    color: var(--cinza-escuro);
 }
 
 .credentials li::before {
     content: "•";
     position: absolute;
     left: 0;
+    top: 0;
     color: var(--verde-salvia);
     font-weight: bold;
     font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 .quote {
     font-family: var(--font-display);
     font-size: var(--text-lg);
     font-style: italic;
-    color: var(--branco);
-    border-left: 3px solid var(--verde-salvia);
-    padding-left: var(--spacing-md);
+    color: var(--cinza-escuro);
     margin-top: var(--spacing-md);
+    text-align: center;
 }
 
 /* ==========================================
@@ -756,6 +907,9 @@ section {
     font-weight: 600;
 }
 
+.send-button {
+    font-family: var(--font-alt);
+}
 /* ==========================================
    FOOTER
    ========================================== */
@@ -774,7 +928,7 @@ section {
 }
 
 .footer-col h4 {
-    font-family: var(--font-cursive);
+    font-family: var(--font-alt);
     font-size: calc(var(--text-lg) + 0.25rem);
     color: var(--branco);
     margin-bottom: var(--spacing-sm);
@@ -859,10 +1013,14 @@ section {
     .hero {
         grid-template-columns: 1fr;
         padding: var(--spacing-lg) var(--spacing-md);
+        margin-top: 80px;
     }
     
-    .hero-image {
-        display: none;
+    .hero-image-placeholder {
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+        aspect-ratio: 746 / 800;
     }
     
     .sobre-content {
@@ -870,7 +1028,8 @@ section {
     }
     
     .sobre-image .image-placeholder.profile {
-        height: 350px;
+        width: 250px;
+        height: 250px;
     }
 }
 
@@ -881,6 +1040,41 @@ section {
         --text-xl: 1.5rem;
         --spacing-xl: 4rem;
         --spacing-lg: 3rem;
+    }
+    
+    .hero {
+        margin-top: 80px;
+    }
+    
+    .hero-image-placeholder {
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .sobre-buttons {
+        flex-direction: column;
+    }
+    
+    .sobre-buttons .btn {
+        width: 100%;
+    }
+    
+    .tabs-nav {
+        flex-wrap: wrap;
+    }
+    
+    .tab-btn {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: var(--text-sm);
+    }
+    
+    .steps.compact {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .therapy-grid {
+        grid-template-columns: 1fr;
     }
     
     .nav-menu {
