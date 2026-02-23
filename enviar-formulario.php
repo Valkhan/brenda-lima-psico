@@ -3,8 +3,13 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+use Dotenv\Dotenv;
 
 require 'vendor/autoload.php';
+
+// Carregar variáveis de ambiente
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
 // Configurações de segurança
 header('Content-Type: application/json; charset=utf-8');
@@ -19,9 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Configurações de email
-define('EMAIL_DESTINO', 'cadu17052006@gmail.com'); // Email de destino
-define('EMAIL_ASSUNTO', 'Novo Pré-Agendamento - Site');
+// Configurações de email (via .env)
+define('EMAIL_DESTINO', $_ENV['EMAIL_DESTINO']); 
+define('EMAIL_ASSUNTO', $_ENV['EMAIL_ASSUNTO']);
 
 // Função para sanitizar dados
 function sanitizar($dado) {
@@ -38,18 +43,18 @@ function enviarEmailPHPMailer($corpoHtml, $corpoTexto, $nome, $emailCliente) {
     $mail = new PHPMailer(true);
 
     try {
-        // Configurações SMTP
+        // Configurações SMTP (via .env)
         $mail->isSMTP();
-        $mail->Host       = 'srv40.prodns.com.br';
+        $mail->Host       = $_ENV['SMTP_HOST'];
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'noreply@clinicabrendalima.com.br';
-        $mail->Password   = '}grsY}2yV(m&';
+        $mail->Username   = $_ENV['SMTP_USERNAME'];
+        $mail->Password   = $_ENV['SMTP_PASSWORD'];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        $mail->Port       = 465;
+        $mail->Port       = $_ENV['SMTP_PORT'];
         $mail->CharSet    = 'UTF-8';
 
         // Remetente e Destinatário
-        $mail->setFrom('noreply@clinicabrendalima.com.br', 'Site Psicóloga Brenda Lima');
+        $mail->setFrom($_ENV['SMTP_USERNAME'], $_ENV['SMTP_FROM_NAME']);
         $mail->addAddress(EMAIL_DESTINO);
         $mail->addReplyTo($emailCliente, $nome);
 
@@ -208,19 +213,20 @@ if (!file_exists(dirname($logFile))) {
 file_put_contents($logFile, json_encode($logData) . "\n", FILE_APPEND);
 
 // Responder ao cliente
+$whatsappNumber = $_ENV['WHATSAPP_NUMBER'];
 if ($emailEnviado) {
     http_response_code(200);
     echo json_encode([
         'sucesso' => true,
         'mensagem' => 'Pré-agendamento enviado com sucesso! Entrarei em contato em breve.',
-        'whatsapp' => "https://wa.me/5511990186911?text=" . urlencode("Olá Brenda! Acabei de preencher o formulário de pré-agendamento no site. Meu nome é {$nome}.")
+        'whatsapp' => "https://wa.me/{$whatsappNumber}?text=" . urlencode("Olá Brenda! Acabei de preencher o formulário de pré-agendamento no site. Meu nome é {$nome}.")
     ]);
 } else {
     http_response_code(500);
     echo json_encode([
         'sucesso' => false,
         'mensagem' => 'Erro ao enviar email. Por favor, entre em contato via WhatsApp.',
-        'whatsapp' => "https://wa.me/5511990186911?text=" . urlencode("Olá! Gostaria de agendar uma consulta.")
+        'whatsapp' => "https://wa.me/{$whatsappNumber}?text=" . urlencode("Olá! Gostaria de agendar uma consulta.")
     ]);
 }
 ?>
