@@ -1,0 +1,29 @@
+===========================================
+  NOVO PRÉ-AGENDAMENTO - SITE
+===========================================
+
+DADOS PESSOAIS
+--------------
+Nome: {{nome}}
+Telefone: {{telefone}}
+Email: {{email}}
+Idade: {{idade}} anos
+
+INFORMAÇÕES DO ATENDIMENTO
+--------------------------
+Já fez terapia antes: {{jaFezTerapiaTexto}}
+Possui Diagnóstico: {{diagnosticoCompleto}}
+
+MOTIVO DA BUSCA
+---------------
+{{motivoBusca}}
+
+DISPONIBILIDADE
+---------------
+{{disponibilidade}}
+
+Recebido em: {{dataHora}}
+
+---
+Brenda Lima | Neuropsicóloga & Psicóloga Comportamental
+https://wa.me/55{{telefone}}

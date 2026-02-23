@@ -1,11 +1,144 @@
 // ==========================================
+// MODAL CUSTOMIZADO (substitui alert/confirm)
+// ==========================================
+
+const Modal = {
+    overlay: null,
+    
+    init() {
+        this.overlay = document.getElementById('modalCustom');
+    },
+    
+    show({ type = 'info', title, message, buttons = [], onClose = null }) {
+        if (!this.overlay) this.init();
+        
+        const iconEl = document.getElementById('modalIcon');
+        const titleEl = document.getElementById('modalTitle');
+        const messageEl = document.getElementById('modalMessage');
+        const buttonsEl = document.getElementById('modalButtons');
+        
+        // Definir ícone baseado no tipo (usando imagens)
+        const icons = {
+            warning: { class: 'icon-warning', img: 'img/warning.png' },
+            error: { class: 'icon-error', img: 'img/error.png' },
+            success: { class: 'icon-success', img: 'img/success.png' },
+            question: { class: 'icon-question', img: 'img/question.png' },
+            info: { class: 'icon-info', img: 'img/info.png' }
+        };
+        
+        const iconConfig = icons[type] || icons.info;
+        iconEl.className = 'modal-icon ' + iconConfig.class;
+        iconEl.innerHTML = '<img src="' + iconConfig.img + '" alt="' + type + '">';
+        
+        titleEl.textContent = title;
+        messageEl.innerHTML = message;
+        
+        // Limpar e criar botões
+        buttonsEl.innerHTML = '';
+        buttons.forEach(btn => {
+            const button = document.createElement('button');
+            button.className = 'modal-btn ' + (btn.class || 'modal-btn-primary');
+            button.textContent = btn.text;
+            button.addEventListener('click', () => {
+                this.hide();
+                if (btn.onClick) btn.onClick();
+            });
+            buttonsEl.appendChild(button);
+        });
+        
+        // Mostrar modal
+        this.overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        
+        // Fechar ao clicar fora
+        this.overlay.onclick = (e) => {
+            if (e.target === this.overlay) {
+                this.hide();
+                if (onClose) onClose();
+            }
+        };
+        
+        // Fechar com ESC
+        document.addEventListener('keydown', this.handleEsc);
+    },
+    
+    hide() {
+        if (this.overlay) {
+            this.overlay.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+        document.removeEventListener('keydown', this.handleEsc);
+    },
+    
+    handleEsc(e) {
+        if (e.key === 'Escape') Modal.hide();
+    },
+    
+    // Atalhos úteis
+    alert(title, message, onOk = null) {
+        this.show({
+            type: 'warning',
+            title,
+            message,
+            buttons: [{ text: 'OK', onClick: onOk }]
+        });
+    },
+    
+    error(title, message, onOk = null) {
+        this.show({
+            type: 'error',
+            title,
+            message,
+            buttons: [{ text: 'Entendi', onClick: onOk }]
+        });
+    },
+    
+    success(title, message, onOk = null) {
+        this.show({
+            type: 'success',
+            title,
+            message,
+            buttons: [{ text: 'OK', onClick: onOk }]
+        });
+    },
+    
+    confirm(title, message, onConfirm, onCancel = null) {
+        this.show({
+            type: 'question',
+            title,
+            message,
+            buttons: [
+                { text: 'Sim', class: 'modal-btn-primary', onClick: onConfirm },
+                { text: 'Não', class: 'modal-btn-secondary', onClick: onCancel }
+            ]
+        });
+    },
+    
+    whatsappConfirm(title, message, whatsappUrl) {
+        this.show({
+            type: 'question',
+            title,
+            message,
+            buttons: [
+                { 
+                    text: 'Abrir WhatsApp', 
+                    class: 'modal-btn-whatsapp', 
+                    onClick: () => window.open(whatsappUrl, '_blank') 
+                },
+                { text: 'Agora não', class: 'modal-btn-secondary' }
+            ]
+        });
+    }
+};
+
+// ==========================================
 // MENU MOBILE
 // ==========================================
 
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const navMenu = document.querySelector('.nav-menu');
 
-if (mobileMenuBtn) {
+if (mobileMenuBtn && navMenu) {
     mobileMenuBtn.addEventListener('click', () => {
         mobileMenuBtn.classList.toggle('active');
         navMenu.classList.toggle('active');
@@ -18,6 +151,14 @@ if (mobileMenuBtn) {
             mobileMenuBtn.classList.remove('active');
             navMenu.classList.remove('active');
         });
+    });
+    
+    // Fechar menu ao clicar fora
+    document.addEventListener('click', (e) => {
+        if (!mobileMenuBtn.contains(e.target) && !navMenu.contains(e.target)) {
+            mobileMenuBtn.classList.remove('active');
+            navMenu.classList.remove('active');
+        }
     });
 }
 
@@ -73,6 +214,7 @@ window.addEventListener('scroll', () => {
 // FORMULÁRIO DE CONTATO
 // ==========================================
 
+let enviandoFormulario = false;
 const formContato = document.getElementById('preAgendamento');
 const mensagemSucesso = document.getElementById('mensagemSucesso');
 
@@ -87,7 +229,10 @@ if (formContato) {
 
         // Validar LGPD
         if (!document.getElementById('lgpd').checked) {
-            alert('Por favor, aceite os termos da LGPD para continuar.');
+            Modal.alert(
+                'Termos LGPD',
+                'Por favor, aceite os termos da LGPD para continuar com o pré-agendamento.'
+            );
             return;
         }
 
@@ -110,7 +255,7 @@ if (formContato) {
         .then(data => {
             if (data.sucesso) {
                 // Mostrar mensagem de sucesso
-                mensagemSucesso.innerHTML = '<p>✓ ' + data.mensagem + '</p>';
+                mensagemSucesso.innerHTML = '<p>' + data.mensagem + '</p>';
                 mensagemSucesso.style.display = 'block';
                 mensagemSucesso.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
@@ -120,9 +265,11 @@ if (formContato) {
                 // Oferecer opção de WhatsApp
                 if (data.whatsapp) {
                     setTimeout(() => {
-                        if (confirm('Deseja também enviar uma mensagem via WhatsApp?')) {
-                            window.open(data.whatsapp, '_blank');
-                        }
+                        Modal.whatsappConfirm(
+                            'Conectar pelo WhatsApp?',
+                            'Deseja enviar uma mensagem diretamente pelo WhatsApp para agilizar o contato?',
+                            data.whatsapp
+                        );
                     }, 1500);
                 }
 
@@ -132,15 +279,23 @@ if (formContato) {
                 }, 10000);
             } else {
                 // Erro no envio
-                alert('Erro: ' + data.mensagem + '\n\nVamos redirecioná-lo para o WhatsApp.');
-                if (data.whatsapp) {
-                    window.open(data.whatsapp, '_blank');
-                }
+                Modal.show({
+                    type: 'error',
+                    title: 'Ops! Algo deu errado',
+                    message: data.mensagem + '<br><br>Mas não se preocupe, você pode entrar em contato pelo WhatsApp.',
+                    buttons: [
+                        { 
+                            text: '💬 Ir para WhatsApp', 
+                            class: 'modal-btn-whatsapp', 
+                            onClick: () => { if (data.whatsapp) window.open(data.whatsapp, '_blank'); }
+                        },
+                        { text: 'Fechar', class: 'modal-btn-secondary' }
+                    ]
+                });
             }
         })
         .catch(error => {
             console.error('Erro:', error);
-            alert('Erro ao enviar formulário. Redirecionando para WhatsApp...');
             
             // Fallback para WhatsApp
             const nome = document.getElementById('nome').value;
@@ -148,13 +303,27 @@ if (formContato) {
                 nome: nome,
                 telefone: document.getElementById('telefone').value,
                 email: document.getElementById('email').value,
-                tipoAtendimento: document.getElementById('tipoAtendimento').value,
-                idadePaciente: document.getElementById('idadePaciente').value,
-// Função removida - agora integrada no handler do formulário           });
+                idade: document.getElementById('idade').value,
+                motivoBusca: document.getElementById('motivoBusca').value,
+                possuiDiagnostico: document.getElementById('possuiDiagnostico').value,
+                disponibilidade: document.getElementById('disponibilidade').value,
+            });
             
             const numeroWhatsApp = '5511990186911';
             const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagemWhatsApp)}`;
-            window.open(urlWhatsApp, '_blank');
+            
+            Modal.show({
+                type: 'error',
+                title: 'Erro de Conexão',
+                message: 'Não foi possível enviar o formulário.<br><br>Clique no botão abaixo para continuar pelo WhatsApp.',
+                buttons: [
+                    { 
+                        text: '💬 Continuar no WhatsApp', 
+                        class: 'modal-btn-whatsapp', 
+                        onClick: () => window.open(urlWhatsApp, '_blank')
+                    }
+                ]
+            });
         })
         .finally(() => {
             // Restaurar botão
@@ -166,33 +335,20 @@ if (formContato) {
 }
 
 function criarMensagemWhatsApp(dados) {
-    const tipoAtendimentoTexto = dados.tipoAtendimento === 'adulto' ? 'Atendimento Adulto' : 'Atendimento Infantil';
-    const diagnosticoTexto = {
-        'sim': 'Sim',
-        'nao': 'Não',
-        'parcial': 'Parcial/Em investigação'
-    }[dados.possuiDiagnostico];
-
-    const horarioTexto = {
-        'manha': 'Manhã (8h-12h)',
-        'tarde': 'Tarde (12h-18h)',
-        'noite': 'Noite (18h-21h)'
-    }[dados.melhorHorario];
+    const diagnosticoTexto = dados.possuiDiagnostico === 'sim' ? 'Sim' : 'Não';
 
     return `*Pré-Agendamento - Site*
 
 *Nome:* ${dados.nome}
 *Telefone:* ${dados.telefone}
 *E-mail:* ${dados.email}
+*Idade:* ${dados.idade} anos
 
-*Tipo de Atendimento:* ${tipoAtendimentoTexto}
-*Idade do Paciente:* ${dados.idadePaciente} anos
-
-*Motivo Principal:*
-${dados.motivoPrincipal}
+*Motivo da Busca:*
+${dados.motivoBusca || 'Não informado'}
 
 *Possui Diagnóstico Prévio:* ${diagnosticoTexto}
-*Melhor Horário para Contato:* ${horarioTexto}`;
+*Disponibilidade:* ${dados.disponibilidade || 'Não informada'}`;
 }
 
 function mostrarMensagemSucesso() {
@@ -291,42 +447,22 @@ inputs.forEach(input => {
 });
 
 // ==========================================
-// PREVENÇÃO DE ENVIO MÚLTIPLO
-// ==========================================
-
-let enviandoFormulario = false;
-
-if (formContato) {
-    formContato.addEventListene/ CONTROLE DE IDADE DO PACIENTE
-// ==========================================
-
-const tipoAtendimentoSelect = document.getElementById('tipoAtendimento');
-const idadePacienteInput = document.getElementById('idadePaciente');
-
-if (tipoAtendimentoSelect && idadePacienteInput) {
-    tipoAtendimentoSelect.addEventListener('change', function() {
-        if (this.value === 'infantil') {
-            idadePacienteInput.setAttribute('max', '17');
-            if (parseInt(idadePacienteInput.value) > 17) {
-                idadePacienteInput.value = '';
-            }
-        } else if (this.value === 'adulto') {
-            idadePacienteInput.setAttribute('max', '120');
-            if (parseInt(idadePacienteInput.value) < 18) {
-                idadePacienteInput.value = '';
-            }
-        }
-    });
-}
-
-// ==========================================
 // AJUSTE AUTOMÁTICO DE ALTURA DO TEXTAREA
 // ==========================================
 
-const textarea = document.getElementById('motivoPrincipal');
+const motivoBuscaTextarea = document.getElementById('motivoBusca');
 
-if (textarea) {
-    textarea.addEventListener('input', function() {
+if (motivoBuscaTextarea) {
+    motivoBuscaTextarea.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    });
+}
+
+const disponibilidadeTextarea = document.getElementById('disponibilidade');
+
+if (disponibilidadeTextarea) {
+    disponibilidadeTextarea.addEventListener('input', function() {
         this.style.height = 'auto';
         this.style.height = (this.scrollHeight) + 'px';
     });
@@ -336,6 +472,6 @@ if (textarea) {
 // LOG DE INICIALIZAÇÃO
 // ==========================================
 
-console.log('🧠 Site Brenda Lima - Neuropsicóloga');
-console.log('✅ JavaScript carregado com sucesso');
-console.log('📱 WhatsApp: +55 11 99018-6911');
+console.log('Site Brenda Lima - Psicóloga Comportamental');
+console.log('JavaScript carregado com sucesso');
+console.log('WhatsApp: +55 11 99018-6911');

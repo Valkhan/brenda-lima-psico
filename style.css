@@ -181,7 +181,7 @@ ul {
 }
 
 .nav-menu a {
-    font-size: var(--text-sm);
+    font-size: 0.9rem;
     color: var(--cinza-escuro);
     transition: var(--transition);
     font-weight: 500;
@@ -581,6 +581,11 @@ section {
     font-weight: 400;
 }
 
+.highlight-description {
+    font-size: 0.95em;
+    margin-top: 0.5em;
+}
+
 .image-placeholder {
     width: 100%;
     height: 400px;
@@ -602,6 +607,50 @@ section {
     font-weight: 600;
     font-style: italic;
     margin-top: var(--spacing-md);
+}
+
+/* ==========================================
+   SUPERVISÃO SECTION
+   ========================================== */
+
+.supervisao {
+    background-color: var(--bege-claro);
+    padding: var(--spacing-xxl) 0;
+}
+
+.supervisao-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.supervisao-intro {
+    font-family: var(--font-body);
+    font-size: var(--text-md);
+    color: var(--cinza-escuro);
+    line-height: 1.8;
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.supervisao-block {
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background-color: var(--branco);
+    border-radius: 10px;
+    border-left: 4px solid var(--vermelho-profundo);
+}
+
+.supervisao-block h3 {
+    font-family: var(--font-alt);
+    font-size: var(--text-lg);
+    color: var(--vermelho-profundo);
+    margin-bottom: var(--spacing-sm);
+}
+
+.supervisao-block p {
+    font-family: var(--font-body);
+    color: var(--cinza-escuro);
+    line-height: 1.7;
 }
 
 /* ==========================================
@@ -1014,6 +1063,7 @@ section {
 }
 
 .mensagem-sucesso {
+    display: none;
     background-color: var(--verde-salvia);
     color: var(--branco);
     padding: var(--spacing-md);
@@ -1025,6 +1075,10 @@ section {
 .mensagem-sucesso p {
     margin: 0;
     font-weight: 600;
+}
+
+.hidden {
+    display: none !important;
 }
 
 .send-button {
@@ -1126,6 +1180,155 @@ section {
 }
 
 /* ==========================================
+   MODAL CUSTOMIZADO
+   ========================================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+}
+
+.modal-overlay[style*="display: flex"] {
+    animation: modalFadeIn 0.3s ease forwards;
+}
+
+@keyframes modalFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-container {
+    background: var(--branco);
+    border-radius: 20px;
+    padding: 2.5rem;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transform: scale(0.8) translateY(20px);
+    animation: modalSlideIn 0.3s ease forwards;
+}
+
+@keyframes modalSlideIn {
+    to {
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-icon img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.modal-icon.icon-warning {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+}
+
+.modal-icon.icon-error {
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+}
+
+.modal-icon.icon-success {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+}
+
+.modal-icon.icon-question {
+    background: linear-gradient(135deg, var(--bege-claro) 0%, #e8ddd4 100%);
+}
+
+.modal-icon.icon-info {
+    background: linear-gradient(135deg, #cce5ff 0%, #b8daff 100%);
+}
+
+.modal-title {
+    font-family: var(--font-alt);
+    font-size: 1.5rem;
+    color: var(--cinza-escuro);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.modal-message {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--cinza-medio);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.modal-btn {
+    padding: 0.875rem 2rem;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    min-width: 120px;
+}
+
+.modal-btn-primary {
+    background: linear-gradient(135deg, var(--vermelho-profundo) 0%, var(--vermelho-escuro) 100%);
+    color: var(--branco);
+}
+
+.modal-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(158, 21, 39, 0.4);
+}
+
+.modal-btn-secondary {
+    background: var(--bege-claro);
+    color: var(--cinza-escuro);
+    border: 1px solid var(--verde-salvia);
+}
+
+.modal-btn-secondary:hover {
+    background: var(--verde-salvia);
+    color: var(--branco);
+}
+
+.modal-btn-whatsapp {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: var(--branco);
+}
+
+.modal-btn-whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+/* ==========================================
    RESPONSIVE DESIGN
    ========================================== */
 
@@ -1147,39 +1350,54 @@ section {
     }
 
     /* 2. A Imagem (No Topo e Sem Cortes) */
-    .hero-image {
-        order: 1;                /* Garante que fique no topo */
-        width: 100% !important;
-        height: 65vh !important; /* Aumentamos para 65% da tela para ela aparecer bem */
-        position: relative;
-        margin: 0;
-        top: 0 !important;
-        right: 0 !important;
-        transform: none !important;
-        margin-top: -100px;
-    }
+.hero-image {
+    display: block; /* Força o comportamento de bloco */
+    width: 100% !important;
+    height: 65vh !important;
+    position: relative;
+    
+    /* Em vez de margem negativa pura, tente zerar e usar top se necessário */
+    margin: 0;
+    top: 19rem;
+    /* Mantemos visível para o degradê vazar */
+    overflow: visible !important; 
+    z-index: 1;
+}
 
-    .hero-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;       /* Preenche o espaço mantendo a proporção */
-        object-position: center top; /* Foca no topo da imagem para não cortar a cabeça */
-    }
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    /* Remove qualquer chance de espaço extra embaixo */
+    vertical-align: bottom; 
+}
 
-    /* 3. O Degradê de Transição (Na base da foto) */
-    .hero-image::after {
-        content: '';
-        display: block !important;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 150px;           /* Altura do degradê para "derreter" a foto no fundo */
-        background: linear-gradient(to bottom, 
-            rgba(248, 246, 243, 0) 60%,
-            rgba(248, 246, 243, 1) 100%
-        ) !important;
-    }
+/* O Degradê Corrigido (A Prova de Falhas) */
+.hero-image::after {
+    content: '';
+    display: block !important;
+    position: absolute;
+    
+    /* 1. Fazemos ele vazar 10px para baixo da imagem */
+    top: auto;
+    bottom: -10px; 
+    left: 0;
+    width: 100%;
+    height: 150px; 
+    
+    /* 2. Gradiente agressivo: fica 100% sólido antes de chegar no fim */
+    background: linear-gradient(
+        to bottom, 
+        rgba(248, 246, 243, 0) 0%,
+        rgba(248, 246, 243, 1) 85%, 
+        rgba(248, 246, 243, 1) 100%
+    ) !important;
+    
+    z-index: 2;
+    pointer-events: none;
+}
 
     /* 4. O Texto (Abaixo da Imagem) */
     .hero-content {
@@ -1261,15 +1479,19 @@ section {
         transform: translateY(-150%);
         transition: var(--transition);
         opacity: 0;
+        z-index: 999;
+        pointer-events: none;
     }
     
     .nav-menu.active {
         transform: translateY(0);
         opacity: 1;
+        pointer-events: auto;
     }
     
     .mobile-menu-btn {
         display: flex;
+        z-index: 1000;
     }
     
     .mobile-menu-btn.active span:nth-child(1) {
@@ -1339,16 +1561,16 @@ section {
     .hero-image img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
     }
 
     .hero-image::after {
         content: "";
         position: absolute;
-        top: 0;
+        top: auto;
         left: 0;
         right: 0;
-        bottom: 0;
+        bottom: -10px;
         background: linear-gradient(
             to bottom,
             rgba(255, 255, 255, 0) 0%,
@@ -1386,6 +1608,37 @@ section {
     
     .form-contato {
         padding: var(--spacing-md);
+    }
+}
+
+/* Ajuste para telas horizontais (Tablets deitados ou Laptops pequenos) */
+@media (orientation: landscape) and (max-height: 600px) {
+    .hero-image {
+        /* Aumentamos a altura em telas baixas para a imagem não sumir */
+        height: 80vh !important; 
+        /* Diminuímos o recuo para não "subir" demais a cabeça dela */
+        top: 80px !important; 
+    }
+
+    .hero-image img {
+        /* Foca um pouco mais abaixo para compensar o corte horizontal */
+        object-position: center 20%; 
+    }
+}
+
+/* Ajuste específico para o iPad Mini e similares no modo horizontal */
+@media (min-width: 769px) and (max-width: 1100px) and (orientation: landscape) {
+    .hero-image {
+        height: 75vh !important;
+        top: 12rem !important;
+    }
+}
+
+@media (orientation: landscape) {
+    .hero-image::after {
+        /* No iPad deitado, empurramos ainda mais para garantir que cubra o branco */
+        bottom: -80px; 
+        height: 300px;
     }
 }
 
